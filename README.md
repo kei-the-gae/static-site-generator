@@ -15,16 +15,36 @@ This is a [guided project](https://www.boot.dev/courses/build-static-site-genera
 
 ## Usage
 
-Python 3.10 or later is required to run the static site generator.\
-\
-To use the static site generator, clone the repository and run the following command from the project root directory:
+Python 3.10 or later is required to run the static site generator.
+
+### Local environment
+
+Clone the repository and run the following command from the project root directory:
 
 ```bash
 ./main.sh
 ```
 
-This will generate a static HTML site in the `public` directory, from assets placed in the `static` directory and markdown files placed in the `content` directory. Sample content has been placed in both the `static` and `content` directories.
+This will generate a static HTML site in the `docs` directory, from assets placed in the `static` directory and markdown files placed in the `content` directory. Sample content has been placed in both the `static` and `content` directories.
 
 The script also runs a local HTTP server from Python's built-in `http.server` module, which serves the generated site at [http://localhost:8888](http://localhost:8888). Be sure to terminate the process with `Ctrl+C` when you are done to close the server and port.
 
-> **NOTE**: This generator does not support nested inline markdown elements for simplicity. It will throw a ValueError if it encounters nested inline markdown elements due to mismatched delimiters when parsing inline markdown.
+### Deployment
+
+You will need to edit the `./build.sh` script. Replace the text in quotes to the base url of your deployed site as so:
+
+```
+python3 src/main.py "BASE_URL/FOR/SITE"
+```
+
+Then, run the following command from the project root directory:
+
+```bash
+./build.sh
+```
+
+This will generate a static HTML site in the `docs` directory, from assets placed in the `static` directory and markdown files placed in the `content` directory, converting all href and src links to absolute links based on the base URL provided.
+
+The `docs` directory can then be uploaded to your web server or hosting service of choice.
+
+> **NOTE**: This generator does not support nested inline markdown elements for simplicity. It may throw a ValueError if it encounters nested inline markdown elements due to mismatched delimiters when parsing inline markdown.
