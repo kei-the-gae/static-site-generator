@@ -14,7 +14,7 @@ default_basepath = "/"
 
 def main():
     basepath = default_basepath
-    if sys.argv[1]:
+    if len(sys.argv) > 1:
         basepath = sys.argv[1]
 
     print("Deleting public directory...")
